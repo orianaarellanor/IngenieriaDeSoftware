@@ -1,0 +1,49 @@
+@startuml reto2_OrianaArellano_BryanSilva
+class Teclado{
+ -teclas: 150
+
+}
+class Person{
+ +name
+ +id
+ +age
+}
+class Worker{}
+class Teacher{}
+class Student{}
+
+Person ^-- Worker
+Person ^-- Teacher
+Person ^-- Student
+
+class DiscoDuro{}
+class Pista{}
+class Sector{}
+
+
+DiscoDuro "1...*" *-- Pista
+Pista "1...*" *-- Sector
+
+class Poligono{}
+class Triangulo{}
+class lado{}
+
+Poligono ^-- Triangulo
+Triangulo "3" *-- lado
+
+class Equipo{}
+class Jugador{}
+class Estadio{}
+
+Equipo "0...*" o-- Jugador
+Equipo -- Estadio: Homeclub
+
+class Persona{}
+class Comite{}
+class Coordinador{}
+
+
+Persona ^-- Coordinador
+Comite  "2...*" o-- Persona
+Coordinador "1...*" -- "coordinar" Comite
+@enduml
