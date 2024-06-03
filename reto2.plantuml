@@ -1,4 +1,7 @@
-@startuml reto2_OrianaArellano_BryanSilva
+@startuml reto2
+
+'Bryan Silva 27531458, Oriana Arellano 28309661
+
 'Ejercicio 1
 class Teclado{
  -teclas: 150
