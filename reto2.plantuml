@@ -1,49 +1,266 @@
 @startuml reto2_OrianaArellano_BryanSilva
+'Ejercicio 1
 class Teclado{
  -teclas: 150
-
 }
+
+'Ejercicio 2
 class Person{
  +name
  +id
  +age
 }
+
 class Worker{}
 class Teacher{}
 class Student{}
-
 Person ^-- Worker
 Person ^-- Teacher
 Person ^-- Student
 
+'Ejercicio 3
 class DiscoDuro{}
 class Pista{}
 class Sector{}
-
-
 DiscoDuro "1...*" *-- Pista
 Pista "1...*" *-- Sector
 
+'Ejercicio 4
 class Poligono{}
 class Triangulo{}
 class lado{}
-
 Poligono ^-- Triangulo
 Triangulo "3" *-- lado
 
+'Ejercicio 5
 class Equipo{}
 class Jugador{}
 class Estadio{}
-
 Equipo "0...*" o-- Jugador
 Equipo -- Estadio: Homeclub
 
+'Ejercicio 6
 class Persona{}
 class Comite{}
 class Coordinador{}
-
-
 Persona ^-- Coordinador
 Comite  "2...*" o-- Persona
-Coordinador "1...*" -- "coordinar" Comite
+Coordinador "1...*" -- Comite: coordina
+
+'Ejercicio 7
+class caracterizacion{}
+class criterio{}
+class elemento_clasificado{}
+caracterizacion *-- "1..*" criterio
+elemento_clasificado --^ caracterizacion
+
+'Ejercicio 8
+class laboratorio{}
+class equipo{}
+class laboratorio_nuclear{}
+class equipo_nuclear{}
+laboratorio o-- "1..*" equipo
+laboratorio_nuclear --^ laboratorio
+equipo_nuclear --^ equipo
+laboratorio_nuclear o-- "1..*" equipo_nuclear 
+
+'Ejercicio 9
+class operando{}
+class ecuacion_de_FP{
+operando UFC
+operando TCF
+}
+operando -- "2"ecuacion_de_FP: contiene
+
+'Ejercicio 10
+class TEG{}
+class TGM{}
+class trabajo_de_investigacion{}
+class estudiante_pregrado{}
+class estudiante_postgrado{}
+class profesor{}
+trabajo_de_investigacion ^-- (TGM, TEG)
+trabajo_de_investigacion "1..2" -- "1..*" profesor: dirigido
+TGM "1" -- estudiante_postgrado: tiene
+TEG "1..2" -- estudiante_pregrado: tiene
+
+'Ejercicio 11
+class hojas{}
+class documento_grafico{}
+class texto{}
+class figura2D{
++forma
+}
+class grupo{}
+class dibujo{}
+hojas --* documento_grafico
+hojas o-- dibujo
+dibujo "1" --* "2..*" grupo
+dibujo ^-- grupo
+dibujo ^-- texto
+dibujo ^-- figura2D
+
+'Ejercicio c
+class Poligono{}
+class Punto{
++coordenada x
++coordenada y
+}
+Poligono "3...*" *-- Punto
+object Poligono_1
+object Point_1{
++cord_x = 0
++cord_y = 1
+}
+object Point_2{
++cord_x = 10
++cord_y = 0
+}
+object Point_3{
++cord_x = 10
++cord_y = 10
+}
+Poligono_1 -- "1...*" Point_1
+Poligono_1 -- "1...*" Point_2
+Poligono_1 -- "1...*" Point_3
+object Poligon_1
+object Punto_1{
++cord_x = 0
++cord_y = 0
+}
+object Punto_2{
++cord_x = 1
++cord_y = 0
+}
+object Punto_3{
++cord_x = 0
++cord_y = 1
+}
+object Punto_4{
++cord_x = 1
++cord_y = 1
+}
+Poligon_1 -- Punto_1
+Poligon_1 -- Punto_2
+Poligon_1 -- Punto_3
+Poligon_1 -- Punto_4
+
+'Ejercicio d
+object Termino{
+(x + y/2) / (x/3 + y)
+}
+object Expresion{
+-op_1 = +
+-op_2 = /
+}
+object Variable{
+-nombre_1 = x
+-nombre_2 = y
+}
+object Constante{
+-const_1 = 2
+-const_2 = 3
+}
+Expresion "*" o-- "1er op" Termino 
+Expresion "*" o-- "2do op" Termino
+Termino <|-- Expresion
+Termino <|-- Constante
+Termino <|-- Variable
+
+'Ejercicio e
+/'
+1. ¿Qué significa que el paquete “top” tenga una dependencia con el paquete “controllers”?
+
+Significa que los elementos que se encuentran dentro del paquete “top” requieren de algún elemento del paquete “controllers”, esto quiere decir que los cambios que se hagan en este paquete afectarán al paquete “top”.
+
+2. ¿Con cuántos paquetes tienen dependencias el paquete “Threads”? ¿Cuántas
+dependencias son de entrada y cuántas de salida? ¿Si se hace un cambio en alguna de
+las clases del paquete “Threads” qué podría suceder?
+
+El paquete “Threads” tiene dependencia con 6 paquetes. Tiene 3 dependencias de salida y 3 dependencias de entrada. Si se hace algún cambio en alguna de las clases del paquete “Threads” esto podría afectar directamente a los paquetes “top”, ”controllers” y ”utils” por su relación de dependencia de entrada y estos podrían necesitar ajustes.
+
+3. Hablando en términos de modularidad, ¿este diagrama muestra un código con bajo o
+alto acoplamiento entre los paquetes? ¿Esto es bueno o malo?
+
+Este diagrama muestra un código con alto acoplamiento entre los paquetes, esto es malo porque al realizar cambios en alguno de los paquetes los demás que dependen de él podrían necesitar ajustes, por lo que dificulta su mantenimiento y tiene poca flexibilidad.
+'/
+
+'Ejercicio f
+class EquipoVoleyball{
++nombre
++registro
+}
+
+class Persona{
++telefono
++nombre
++direccion
+}
+
+class Jugador{
++numero
++posicion
+}
+
+class Capitan{}
+
+class Entrenador{
++nivel_acreditacion
++años_experiencia
+}
+
+class Juegos{
++localidad
++puntuacion
+}
+
+EquipoVoleyball "6...20" o-- Jugador
+Jugador ^-- Capitan
+Persona ^-- Jugador
+Persona ^-- Capitan
+Persona ^-- Entrenador
+
+EquipoVoleyball o-- "1..*" Entrenador
+
+EquipoVoleyball "Compite" -- Juegos
+
+
+object EquipVoleyball{
++nombre: Venezuela
++registro: 1564
+}
+
+object Person{
++telefono:04241569785
++nombre: Jose
++direccion: El Valle
+}
+
+object Player{
++numero: 10
++posicion: Delantero
+}
+
+object Entrenadorr{
++nivel_acreditacion: Avanzado
++años_experiencia: 20
+}
+
+object Juegoss{
++localidad: Chile
++puntuacion: 15 
+}
+
+object Capitann
+
+EquipVoleyball "6...20" o-- Player 
+Player ^-- Capitann
+Person ^-- Player 
+Person ^-- Capitann
+Person ^-- Entrenadorr
+
+EquipVoleyball o-- "1..*" Entrenadorr
+
+EquipVoleyball "Compite" -- Juegoss
+
 @enduml
